@@ -1,5 +1,5 @@
 - name: install nginx
-  hosts: local
+  hosts: all
   connection: local
   become: yes
 
@@ -12,3 +12,13 @@
     loop:
       - boto3
       - botocore
+
+  - name: install nginx
+    ansible.builtin.package:
+      name: nginx
+
+  - name: start and enable nginx
+    ansible.builtinservice:
+      name: nginx
+      state: started
+      enabled: yes
